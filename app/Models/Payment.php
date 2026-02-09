@@ -18,5 +18,11 @@ class Payment extends Model
         'payer_phone',
         'paid_at'
     ];
+
+    public function reconciliation()
+    {
+        return $this->hasOne(Reconciliation::class);
+    }
+
 }
 

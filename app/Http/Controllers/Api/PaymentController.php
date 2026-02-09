@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use App\Helpers\AuditHelper;
+
 
 class PaymentController extends Controller
 {
@@ -60,13 +62,28 @@ class PaymentController extends Controller
             'status'=>'in:PENDING,PAID,FAILED,REVERSED'
         ]);
 
+        $old = $payment->toArray();
+
         if ($request->status === 'PAID') {
             $payment->paid_at = now();
         }
 
         $payment->update($request->all());
 
+        // Safe user fetch
+        $user = $request->user();
+
+        AuditHelper::log(
+            $user ? $user->id : null,
+            'UPDATE_PAYMENT',
+            'Payment',
+            $payment->id,
+            $old,
+            $payment->toArray()
+        );
+
         return response()->json($payment);
     }
+
 }
 
