@@ -54,3 +54,72 @@ php artisan migrate --seed
 
 5. Start Server
 php artisan serve
+
+
+🔐 Authentication
+
+This API uses Laravel Sanctum.
+
+Register
+POST /api/register
+
+Login
+POST /api/login
+
+
+Returns Bearer Token.
+
+Use in headers:
+
+Authorization: Bearer YOUR_TOKEN
+
+💳 Main Endpoints
+Payments
+GET    /api/payments
+POST   /api/payments
+PUT    /api/payments/{id}
+GET    /api/payments/{id}
+
+Reconciliation
+POST /api/payments/{id}/reconcile
+
+Reports
+GET /api/reports/daily
+GET /api/reports/monthly
+
+👨‍💻 Demo Credentials
+
+Admin User:
+
+Email: admin@test.com
+Password: 12345678
+
+
+Normal User:
+
+Email: user@test.com
+Password: 12345678
+
+📊 Sample API Response
+Payment List
+{
+  "data": [
+    {
+      "id": 1,
+      "control_no": "9876543210",
+      "amount": "150000.00",
+      "status": "PAID",
+      "paid_at": "2026-02-06 10:12:44"
+    }
+  ]
+}
+
+📌 Author
+
+Alex Mwaga
+Backend Developer (Laravel & APIs)
+
+📧 Email: alexmwaga17@gmail.com
+
+🌍 Tanzania
+💼 Available for Remote Work
